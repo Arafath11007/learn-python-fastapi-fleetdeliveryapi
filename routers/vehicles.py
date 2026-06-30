@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 from typing import Literal
-from .database import vehicles_db, save_to_disk
+from .database import vehicles_db, save_to_disk, verify_admin_token
 
 # initiate the router module instead of a full app instance 
 router = APIRouter(
@@ -19,7 +19,7 @@ class vehicleCreate(BaseModel):
     total_trips: int = 0
 
 @router.post("/create")
-async def register_vehicle(vehicle: vehicleCreate):
+async def register_vehicle(vehicle: vehicleCreate, token: str = Depends(verify_admin_token)):
     key = vehicle.registration_number
 
     if key in vehicles_db:
@@ -58,7 +58,7 @@ async def get_vehicle(registration_number: str):
     return vehicles_db[registration_number]
 
 @router.patch('/vehicles/{registration_number}/status')
-async def update_status(registration_number: str, status: str):
+async def update_status(registration_number: str, status: str, token: str = Depends(verify_admin_token)):
     if registration_number not in vehicles_db:
         raise HTTPException(status_code=404, detail="Vehicle registration not found")
     

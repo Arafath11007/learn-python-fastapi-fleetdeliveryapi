@@ -36,3 +36,20 @@ def load_from_disk():
 
 # trigger an immediate historical data load the moment this module is imported
 load_from_disk()
+
+
+
+from fastapi import Header, HTTPException
+
+ADMIN_SECRET_TOKEN = 'kochi-fleet-admin-2026'
+
+async def verify_admin_token(x_admin_token: str = Header(None)):
+    """
+        fastapi dependency that reads 'X-admin-token' from incoming requests headers.
+        blocks the request if there token is invalid or missing
+    """
+
+    if x_admin_token != ADMIN_SECRET_TOKEN:
+        raise HTTPException(status_code=403, detail="Invalid admin token")
+    
+    return x_admin_token
