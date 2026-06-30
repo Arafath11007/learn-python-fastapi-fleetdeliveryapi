@@ -1,7 +1,7 @@
 import uuid
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from main import vehicles_db, trips_db
+from .database import vehicles_db, trips_db, save_to_disk
 
 # initiate the router module instead of a full app instance 
 router = APIRouter(
@@ -17,7 +17,7 @@ class TripsCreate(BaseModel):
     status: str = "Started"
 
 # trips route
-@router.post('/trips')
+@router.post('')
 async def create_trip(trip: TripsCreate):
     
     trip_id = None
@@ -36,17 +36,17 @@ async def create_trip(trip: TripsCreate):
                 "data": trips_db[trip_id]
             }
 
-
+    save_to_disk()
     return {
         'message': 'No available vehicles at the moment'
     }
 
-@router.get('/trips')
+@router.get('')
 async def ll_trips():
     return trips_db
     
 # trip complete
-@router.patch('/trips/{trip_id}/complete')
+@router.patch('/{trip_id}/complete')
 async def complete_trip(trip_id: str):
 
     if trip_id not in trips_db:
@@ -67,6 +67,7 @@ async def complete_trip(trip_id: str):
     current_trips = vehicle.get('total_trips', 0)
     vehicle['total_trips'] = current_trips + 1
 
+    save_to_disk()
     return {
         "message": "trip completed successfully",
         "data": trip

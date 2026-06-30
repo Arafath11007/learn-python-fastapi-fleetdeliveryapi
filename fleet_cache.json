@@ -1,0 +1,55 @@
+{
+    "vehicles": {
+        "KL85D3045": {
+            "registration_number": "KL85D3045",
+            "model_name": "SUZUKI IGNIS DELTA",
+            "vehicle_name": "Car",
+            "status": "AVAILABLE",
+            "total_trips": 2
+        },
+        "LK27E5108": {
+            "registration_number": "LK27E5108",
+            "model_name": "HONDA CBR 150r",
+            "vehicle_name": "BIKE",
+            "status": "AVAILABLE",
+            "total_trips": 1
+        },
+        "LK11AW6855": {
+            "registration_number": "LK11AW6855",
+            "model_name": "SUZUKI GIXXER 150",
+            "vehicle_name": "BIKE",
+            "status": "AVAILABLE",
+            "total_trips": 1
+        }
+    },
+    "trips": {
+        "1942c6928bd349a2b0be22d97061b88e": {
+            "passenger_name": "Yasar",
+            "pickup_location": "Carnival Infopark",
+            "drop_location": "Kangarapadi",
+            "status": "Completed",
+            "registration_number": "KL85D3045"
+        },
+        "04bf960d8d6d4adf93551a394b26dae8": {
+            "passenger_name": "Yasar",
+            "pickup_location": "Carnival Infopark",
+            "drop_location": "Kangarapadi",
+            "status": "Completed",
+            "registration_number": "KL85D3045"
+        },
+        "7ee259680a5a47bbaea87a3e28b88d12": {
+            "passenger_name": "Yasar",
+            "pickup_location": "Carnival Infopark",
+            "drop_location": "Kangarapadi",
+            "status": "Completed",
+            "registration_number": "LK27E5108"
+        },
+        "5a48c6f08eed4263bef25d063ed06e33": {
+            "passenger_name": "Yasar",
+            "pickup_location": "Carnival Infopark",
+            "drop_location": "Kangarapadi",
+            "status": "Completed",
+            "registration_number": "LK11AW6855"
+        }
+    }
+}

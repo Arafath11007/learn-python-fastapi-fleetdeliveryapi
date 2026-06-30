@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from main import vehicles_db
+from .database import vehicles_db, save_to_disk
 
 # initiate the router module instead of a full app instance 
 router = APIRouter(
@@ -15,17 +15,22 @@ class vehicleCreate(BaseModel):
     status: str = "AVAILABLE"
     total_trips: int = 0
 
-@router.post("")
+@router.post("/create")
 async def register_vehicle(vehicle: vehicleCreate):
     key = vehicle.registration_number
+
+    if key in vehicles_db:
+        raise HTTPException(status_code=400, detail="Vehicle registration already exists")
+
     vehicles_db[key] = vehicle.model_dump()
 
+    save_to_disk()
     return {
         "message": "vehicle registered successfully",
         "data": vehicles_db[key]
     }
 
-@router.get('/vehicles')
+@router.get('')
 async def ger_all_vehicles(status: str = None, vehicle_name: str = None):
     if not status and not vehicle_name:
         return vehicles_db
@@ -56,6 +61,8 @@ async def update_status(registration_number: str, status: str):
     
     vehicle = vehicles_db[registration_number]
     vehicle['status'] = status
+
+    save_to_disk()
     return {
         "message": "status updated successfully",
         "data": vehicle
