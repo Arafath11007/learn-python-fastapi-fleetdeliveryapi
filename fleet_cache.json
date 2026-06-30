@@ -20,6 +20,13 @@
             "vehicle_name": "BIKE",
             "status": "AVAILABLE",
             "total_trips": 1
+        },
+        "KL-14-E-3131": {
+            "registration_number": "KL-14-E-3131",
+            "model_name": "ASHOK LAILAND BUS",
+            "vehicle_name": "bus",
+            "status": "AVAILABLE",
+            "total_trips": 0
         }
     },
     "trips": {

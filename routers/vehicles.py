@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Literal
 from .database import vehicles_db, save_to_disk
 
 # initiate the router module instead of a full app instance 
@@ -9,9 +10,11 @@ router = APIRouter(
 )
 
 class vehicleCreate(BaseModel):
-    registration_number: str
-    model_name: str
-    vehicle_name: str
+    # enforce standard plate formatting eg: kl-54-e-5454 using regex patterns
+    registration_number: str = Field(..., pattern=r"^[A-Z]{2}-\d{2}-[A-Z]{1,2}-\d{4}$", description="License plate matching format like KL-07-CD-1234")
+    model_name: str = Field(..., min_length=2, max_length=50)
+    # enforce choices for the category 
+    vehicle_name: Literal['car', 'bike', 'bus', 'truck', 'van']
     status: str = "AVAILABLE"
     total_trips: int = 0
 
