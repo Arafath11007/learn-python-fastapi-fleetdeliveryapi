@@ -34,6 +34,20 @@
             "vehicle_name": "bus",
             "status": "AVAILABLE",
             "total_trips": 0
+        },
+        "KL-11-DD-3535": {
+            "registration_number": "KL-11-DD-3535",
+            "model_name": "Himalayan 411",
+            "vehicle_name": "bike",
+            "status": "AVAILABLE",
+            "total_trips": 0
+        },
+        "KL-11-AE-3141": {
+            "registration_number": "KL-11-AE-3141",
+            "model_name": "APACHE RR 310",
+            "vehicle_name": "bike",
+            "status": "AVAILABLE",
+            "total_trips": 0
         }
     },
     "trips": {

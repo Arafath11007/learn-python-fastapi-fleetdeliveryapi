@@ -18,7 +18,7 @@ class vehicleCreate(BaseModel):
     status: str = "AVAILABLE"
     total_trips: int = 0
 
-@router.post("/create")
+@router.post("")
 async def register_vehicle(vehicle: vehicleCreate, token: str = Depends(verify_admin_token)):
     key = vehicle.registration_number
 
